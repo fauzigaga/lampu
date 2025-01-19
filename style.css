@@ -4,14 +4,34 @@ html {
     padding: 0;
     box-sizing: border-box;
     background-color: black;
+    font-family: "outfit";
 }
-
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 24px;
+    color: white;
+    z-index: 1000;
+    animation: fadeOut 1s ease-in-out forwards; /* Tambahkan animasi */
+    animation-delay: 2s;
+    text-shadow: 0px 0px 10px rgb(2, 162, 255);
+  }
 .layouts {
     max-width: 476px;
     margin: 0 auto;
     height: 100vh;
     border: 1px solid black;
     position: relative;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 2s; 
 }
 .navbar {
     background-color: black;
@@ -48,7 +68,6 @@ html {
     text-decoration:none ;
     font-size: x-large;
     display: block;
-    font-family: "prata";
 }
 
 .buttombar ul li a:hover {
@@ -58,9 +77,12 @@ html {
 .items{
     display: flex;
     flex-wrap: wrap;
-    height: calc(100vh - 100px);
+    height: calc(70vh - 100px);
     padding: 36px ;
-    gap: 16px;
+    gap: 20px;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
 }
 .item{
     display: flex;
@@ -68,16 +90,17 @@ html {
     gap: 8px;
     padding: 8px;
     background-color: white;
-    box-shadow: 0px 0px 4px 1px #999;
+    box-shadow: 0px 0px 10px 1px #02a2ff;
     width: 40%;
+    height: 5rem;
     align-items: center;
     justify-content: center;
+    border-radius: 5px;
 }
-.item img {
-    width: 100px;
-    height: 100px;
-    display: flex;
+.item:hover{
+    box-shadow: 0px 0px 4px 1px #dfee09;
 }
+
 .item-submit {
     background-color: white ;
     padding: 4px 8px;
@@ -87,3 +110,22 @@ html {
     font-size: 10px;
     box-shadow: 0px 0px 4px 1px #000;
 }
+
+
+@keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+ }
