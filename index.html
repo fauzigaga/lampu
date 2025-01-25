@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iot</title>
+    <title>iot by fzigaga</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,23 +12,30 @@
 </head>
 <body>
     <div id="loading-screen">
-        <h1>WELCOME HOME</h1>
+        <h1>WELCOME <span>HOME</span></h1>
       </div>
     <div class="layouts" id="main-content">
         <section class="navbar">
-            <h3>MAGIC CONTROL</h3>
+            <h3>MAGIC <span>CONTROL</span></h3>
         </section>
         <section class="items">
-            <div class="item">
+            <div class="item" id="item">
+                <h3>LAMP</h3>
             <button class="item-submit" id="ledEsp" >TURN ON</button>
             </div>
-            <div class="item">
+            <div class="item" id="item">
             <button class="item-submit" id="ledEsp2" onclick="setEspLed2()">SENSOR ON</button>
             </div>
-            <div class="item">
-               
+            <div class="item" id="item">
             <button class="item-submit" id="ledEsp3" onclick="setEspLed3()">COMINGSOON FITUR</button>
             </div>
+        </section>
+        <section>
+            <footer>
+                <div class="footer">
+                    <p>Copyright &copy;2025 @fzigaga - All rights reserved</p>
+                </div>
+            </footer>
         </section>
         <section class="buttombar">
             <ul>

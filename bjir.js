@@ -25,15 +25,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Referensi ke elemen HTML
     const ledEsp = document.getElementById("ledEsp");
-
+    const border = document.getElementById("item");
     // Mendapatkan data dari database
     onValue(ledRef, function(snapshot) {
         Led1Status = snapshot.val();
         console.log("Current Led1Status from Firebase:", Led1Status); // Debugging log
         if (Led1Status === 1) {
-            ledEsp.style.backgroundColor = "yellow";
+            ledEsp.style.backgroundColor = "#02a2ff";
+            ledEsp.style.color = "#fff";
+            ledEsp.innerHTML ="TURN OFF";
+            ledEsp.style.boxShadow = "0px 0px 10px 1px #02a2ff";
+            border.style.boxShadow = "0px 0px 0px 0px #02a2ff";
+            ledEsp.style.textShadow = "2px 2px 2px #000";
+            ledEsp.style.borderColor = "#02a2ff";
         } else {
             ledEsp.style.backgroundColor = "white";
+            ledEsp.style.color = "#000";
+            ledEsp.innerHTML ="TURN ON";
+            ledEsp.style.boxShadow = "0px 0px 0px 0px #02a2ff";
+            border.style.boxShadow = "0px 0px 10px 1px #02a2ff";
+            ledEsp.style.textShadow = "1px 1px 1px #fff";
+            ledEsp.style.borderColor = "#fff";
         }
     });
 
@@ -66,14 +78,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     console.error("Error uploading data:", error);
                 });
             Led1Status = 1;  // Update local state
-            ledEsp.style.backgroundColor = "yellow"; // Update button color
         }
     });
 });
-
-function setEspLed2 () {
-    console.log('click');
-    
-}
-
-setEspLed2();
