@@ -113,7 +113,8 @@ span{
     justify-content: center;
     align-items: center;
 }
-.item-submit {
+.item-submit,
+.item-submit2 {
     background-color: #02a2ff;
     padding: 4px 8px;
     width: 80%;

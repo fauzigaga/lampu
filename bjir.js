@@ -19,65 +19,79 @@ const database = getDatabase(app);
 
 document.addEventListener("DOMContentLoaded", function() {
     let Led1Status;
+    let Led2Status;
 
     // Referensi ke elemen database
     const ledRef = ref(database, 'Led1Status');
+    const ledRef2 = ref(database, 'Led2Status');
 
     // Referensi ke elemen HTML
     const ledEsp = document.getElementById("ledEsp");
+    const ledEsp2 = document.getElementById("ledEsp2");
     const border = document.getElementById("item");
+    const border2 = document.getElementById("item2");
+    
     // Mendapatkan data dari database
     onValue(ledRef, function(snapshot) {
         Led1Status = snapshot.val();
         console.log("Current Led1Status from Firebase:", Led1Status); // Debugging log
-        if (Led1Status === 1) {
-            ledEsp.style.backgroundColor = "#02a2ff";
-            ledEsp.style.color = "#fff";
-            ledEsp.innerHTML ="TURN OFF";
-            ledEsp.style.boxShadow = "0px 0px 10px 1px #02a2ff";
-            border.style.boxShadow = "0px 0px 0px 0px #02a2ff";
-            ledEsp.style.textShadow = "2px 2px 2px #000";
-            ledEsp.style.borderColor = "#02a2ff";
-        } else {
-            ledEsp.style.backgroundColor = "white";
-            ledEsp.style.color = "#000";
-            ledEsp.innerHTML ="TURN ON";
-            ledEsp.style.boxShadow = "0px 0px 0px 0px #02a2ff";
-            border.style.boxShadow = "0px 0px 10px 1px #02a2ff";
-            ledEsp.style.textShadow = "1px 1px 1px #fff";
-            ledEsp.style.borderColor = "#fff";
-        }
+        Led1Status === 1 ? (ledEsp.style.backgroundColor = "#02a2ff",
+        ledEsp.style.color = "#fff",
+        ledEsp.innerHTML ="TURN OFF",
+        ledEsp.style.boxShadow = "0px 0px 10px 1px #02a2ff",
+        border.style.boxShadow = "0px 0px 0px 0px #02a2ff",
+        ledEsp.style.textShadow = "2px 2px 2px #000",
+        ledEsp.style.borderColor = "#02a2ff" )
+        : 
+        (ledEsp.style.backgroundColor = "white",
+            ledEsp.style.color = "#000",
+            ledEsp.innerHTML ="TURN ON",
+            ledEsp.style.boxShadow = "0px 0px 0px 0px #02a2ff",
+            border.style.boxShadow = "0px 0px 10px 1px #02a2ff",
+            ledEsp.style.textShadow = "1px 1px 1px #fff",
+            ledEsp.style.borderColor = "#fff"
+        );
+    });
+    onValue(ledRef2, function(snapshot) {
+        Led2Status = snapshot.val();
+        console.log("Current Led2Status from Firebase:", Led2Status); // Debugging log
+        Led2Status === 1 ? (ledEsp2.style.backgroundColor = "#02a2ff",
+        ledEsp2.style.color = "#fff",
+        ledEsp2.innerHTML ="TURN OFF",
+        ledEsp2.style.boxShadow = "0px 0px 10px 1px #02a2ff",
+        border2.style.boxShadow = "0px 0px 0px 0px #02a2ff",
+        ledEsp2.style.textShadow = "2px 2px 2px #000",
+        ledEsp2.style.borderColor = "#02a2ff" )
+        : 
+        (ledEsp2.style.backgroundColor = "white",
+            ledEsp2.style.color = "#000",
+            ledEsp2.innerHTML ="TURN ON",
+            ledEsp2.style.boxShadow = "0px 0px 0px 0px #02a2ff",
+            border2.style.boxShadow = "0px 0px 10px 1px #02a2ff",
+            ledEsp2.style.textShadow = "1px 1px 1px #fff",
+            ledEsp2.style.borderColor = "#fff"
+        );
     });
 
     // Event listener untuk tombol toggle
-    document.querySelector(".item-submit").addEventListener("click", function() {
-        console.log("Button clicked. Current Led1Status:", Led1Status); // Debugging log
-
-        if (Led1Status === undefined) {
-            console.warn("LED status is not yet available.");
-            return; // Jangan lakukan apa-apa jika status belum tersedia
-        }
-
-        // Toggle LED status
-        if (Led1Status == 1) {
-            set(ledRef, 0)  // Set to off (0)
-                .then(() => {
-                    console.log("LED turned off and data uploaded.");
-                })
-                .catch((error) => {
-                    console.error("Error uploading data:", error);
-                });
-            Led1Status = 0;  // Update local state
-            ledEsp.style.backgroundColor = "white"; // Update button color
-        } else {
-            set(ledRef, 1)  // Set to on (1)
-                .then(() => {
-                    console.log("LED turned on and data uploaded.");
-                })
-                .catch((error) => {
-                    console.error("Error uploading data:", error);
-                });
-            Led1Status = 1;  // Update local state
-        }
+document.querySelector(".item-submit").addEventListener("click", function() {
+    console.log("Button clicked. Current Led1Status:", Led1Status);
+  
+    if (Led1Status === undefined) {
+      console.warn("LED status is not yet available.");
+      return;
+    }
+  
+    Led1Status === 1 ? (set(ledRef, 0), Led1Status = 0, ledEsp.style.backgroundColor = "white") : (set(ledRef, 1), Led1Status = 1);
+  });
+  
+  document.querySelector(".item-submit2").addEventListener("click", function() {
+      console.log("Button clicked. Current Led2Status:", Led2Status);
+      if (Led2Status === undefined) {
+        console.warn("LED status is not yet available.");
+        return;
+      }
+      Led2Status === 1 ? (set(ledRef2, 0), Led2Status = 0, ledEsp2.style.backgroundColor = "white") : (set(ledRef2, 1), Led2Status = 1);
     });
-});
+    });
+  
