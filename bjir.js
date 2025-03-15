@@ -1,5 +1,6 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
-import { getDatabase, ref, onValue, set } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js';
+import { getDatabase, ref,onValue, get, set } from 'https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js';
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js';
 
 // Konfigurasi Firebase
 const firebaseConfig = {
@@ -13,9 +14,71 @@ const firebaseConfig = {
     measurementId: "G-KVXNYD5WJN"
 };
 
-// Inisialisasi aplikasi Firebase
+// Inisialisasi Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+auth.languageCode = 'en';
 const database = getDatabase(app);
+
+// Google Auth Provider
+const provider = new GoogleAuthProvider();
+const googleLogin = document.getElementById("ledEsp3");
+
+const targetElement = document.getElementById("main-content"); // Ganti dengan ID elemen lo
+
+googleLogin.addEventListener("click", () => {
+  signInWithPopup(auth, provider)
+      .then((result) => {
+          const user = result.user;
+          console.log("User berhasil login:", user.email);
+
+          if (user.email === "ohohihi77@gmail.com" || "fauzigaga59@gmail.com") {
+              targetElement.style.display = "flex";
+          } else {
+              targetElement.style.display = "none";
+          }
+      })
+      .catch((error) => {
+          console.error("Login error:", error.message);
+      });
+});
+
+// Cek status login
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        const userEmail = user.email;
+        console.log("User login:", userEmail);
+
+        if (userEmail ==="ohohihi77@gmail.com" || "fauzigaga59@gmail.com") {
+            targetElement.style.display = "flex"; // Tampilkan elemen
+            login.style.display = "none";
+        } else {
+            targetElement.style.display = "none";
+            login.style.display = "flex";
+        }
+    } else {
+        console.log("Belum login");
+        targetElement.style.display = "none"; // Sembunyikan elemen kalau belum login
+    }
+});
+
+// Login dengan Google
+document.getElementById("login").addEventListener("click", () => {
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            const user = result.user;
+            console.log("User berhasil login:", user.email);
+
+            if (user.email === "ohohihi77@gmail.com" || "fauzigaga59@gmail.com") {
+                targetElement.style.display = "flex";
+            } else {
+                targetElement.style.display = "none";
+            }
+        })
+        .catch((error) => {
+            console.error("Login error:", error.message);
+        });
+});
 
 document.addEventListener("DOMContentLoaded", function() {
     let Led1Status;
@@ -81,17 +144,16 @@ document.querySelector(".item-submit").addEventListener("click", function() {
       console.warn("LED status is not yet available.");
       return;
     }
-  
     Led1Status === 1 ? (set(ledRef, 0), Led1Status = 0, ledEsp.style.backgroundColor = "white") : (set(ledRef, 1), Led1Status = 1);
   });
   
-  document.querySelector(".item-submit2").addEventListener("click", function() {
+document.querySelector(".item-submit2").addEventListener("click", function() {
       console.log("Button clicked. Current Led2Status:", Led2Status);
       if (Led2Status === undefined) {
         console.warn("LED status is not yet available.");
         return;
       }
       Led2Status === 1 ? (set(ledRef2, 0), Led2Status = 0, ledEsp2.style.backgroundColor = "white") : (set(ledRef2, 1), Led2Status = 1);
-    });
-    });
+  });
+});
   

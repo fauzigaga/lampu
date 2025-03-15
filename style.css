@@ -6,6 +6,12 @@ html {
     background-color: black;
     font-family: "outfit";
 }
+#login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
 #loading-screen {
     position: fixed;
     top: 0;
@@ -33,6 +39,10 @@ span{
     color: #02a2ff;
 }
 .layouts {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     max-width: 476px;
     margin: 0 auto;
     height: 100vh;
@@ -137,9 +147,9 @@ span{
   }
 
 footer{
-    position: absolute;
     width: 100%;
-    height: calc(40vh - 100px);;
+    height: calc(40vh - 100px);
+    
 }
 .footer{
     height: 80%;
