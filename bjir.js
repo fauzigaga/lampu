@@ -32,7 +32,7 @@ googleLogin.addEventListener("click", () => {
           const user = result.user;
           console.log("User berhasil login:", user.email);
 
-          if (user.email === "ohohihi77@gmail.com" || "fauzigaga59@gmail.com") {
+          if (user.email === "ohohihi77@gmail.com" || "fauzigaga59@gmail.com" || "atinhsh@gmail.com" || "subi.yanto.wae@gmail.com" ) {
               targetElement.style.display = "flex";
           } else {
               targetElement.style.display = "none";
@@ -49,7 +49,7 @@ onAuthStateChanged(auth, (user) => {
         const userEmail = user.email;
         console.log("User login:", userEmail);
 
-        if (userEmail ==="ohohihi77@gmail.com" || "fauzigaga59@gmail.com") {
+        if (userEmail ==="ohohihi77@gmail.com" || "fauzigaga59@gmail.com" || "atinhsh@gmail.com" || "subi.yanto.wae@gmail.com") {
             targetElement.style.display = "flex"; // Tampilkan elemen
             login.style.display = "none";
         } else {
